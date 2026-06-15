@@ -1,0 +1,38 @@
+name: flutter_iot_shield
+description: >
+  A reusable IoT security layer for Flutter apps communicating with BLE 
+  smart devices. Provides device authentication, health data validation,
+  platform channel sanitization, firmware verification, and secure storage.
+version: 1.0.0
+homepage: https://github.com/Syf-Almjd/flutter_iot_shield
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Cryptography
+  cryptography: ^2.7.0
+  pointycastle: ^3.9.1
+  # Secure storage
+  flutter_secure_storage: ^9.2.2
+  # Database
+  sqflite: ^2.3.3+1
+  path_provider: ^2.1.4
+  path: ^1.9.0
+  # Utilities
+  convert: ^3.1.1
+  # ZIP parsing for firmware verification
+  archive: ^3.6.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  mockito: ^5.4.4
+  build_runner: ^2.4.8
+
+flutter:
+  # No assets for the package itself

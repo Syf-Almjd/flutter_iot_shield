@@ -1,0 +1,51 @@
+Running `(cd /Users/saifalmajd/.pub-cache/hosted/pub.dev/objective_c-9.4.1/; TMPDIR=/var/folders/24/9l03c6w15m14g3fk1kmcxfxr0000gn/T/ PATH=/Users/saifalmajd/.gemini/antigravity-ide/bin:/Users/saifalmajd/.antigravity-ide/antigravity-ide/bin:/Users/saifalmajd/.antigravity-ide/antigravity-ide/bin:/Users/saifalmajd/.antigravity-ide/antigravity-ide/bin:/Users/saifalmajd/.antigravity-ide/antigravity-ide/bin:/Users/saifalmajd/.antigravity-ide/antigravity-ide/bin:/Users/saifalmajd/.antigravity-ide/antigravity-ide/bin:/Users/saifalmajd/.antigravity-ide/antigravity-ide/bin:/Users/saifalmajd/.antigravity-ide/antigravity-ide/bin:/Users/saifalmajd/.antigravity-ide/antigravity-ide/bin:/Users/saifalmajd/.local/bin:/Users/saifalmajd/.antigravity/antigravity/bin:/Users/saifalmajd/.antigravity/antigravity/bin:/Users/saifalmajd/.antigravity/antigravity/bin:/Users/saifalmajd/.antigravity/antigravity/bin:/Users/saifalmajd/.antigravity/antigravity/bin:/Users/saifalmajd/.antigravity/antigravity/bin:/Users/saifalmajd/.antigravity/antigravity/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/Users/saifalmajd/tools/flutter/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin HOME=/Users/saifalmajd /Users/saifalmajd/tools/flutter/bin/cache/dart-sdk/bin/dart --packages=/Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/package_config.json /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/objective_c/7ad245dadc068daf8ba9d7bb51a8ef8e/hook.dill --config=/Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/objective_c/7ad245dadc068daf8ba9d7bb51a8ef8e/input.json )`.
+INFO: 2026-06-14 19:38:25.504386: Using compiler /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang from BuildInput.cCompiler.cc.
+
+INFO: 2026-06-14 19:38:25.507330: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -c /Users/saifalmajd/.pub-cache/hosted/pub.dev/objective_c-9.4.1/src/include/dart_api_dl.c -fpic -gline-tables-only -I src -o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/include/dart_api_dl.c.o
+
+INFO: 2026-06-14 19:38:25.508522: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -c /Users/saifalmajd/.pub-cache/hosted/pub.dev/objective_c-9.4.1/src/objective_c.c -fpic -gline-tables-only -I src -o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.c.o
+
+INFO: 2026-06-14 19:38:25.508680: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -x objective-c -fobjc-arc -c /Users/saifalmajd/.pub-cache/hosted/pub.dev/objective_c-9.4.1/src/input_stream_adapter.m -fpic -gline-tables-only -I src -o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-06-14 19:38:25.508793: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -x objective-c -fobjc-arc -c /Users/saifalmajd/.pub-cache/hosted/pub.dev/objective_c-9.4.1/src/objective_c.m -fpic -gline-tables-only -I src -o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.m.o
+
+INFO: 2026-06-14 19:38:25.508897: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -x objective-c -fobjc-arc -c /Users/saifalmajd/.pub-cache/hosted/pub.dev/objective_c-9.4.1/src/observer.m -fpic -gline-tables-only -I src -o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/observer.m.o
+
+INFO: 2026-06-14 19:38:25.509095: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -x objective-c -fobjc-arc -c /Users/saifalmajd/.pub-cache/hosted/pub.dev/objective_c-9.4.1/src/protocol.m -fpic -gline-tables-only -I src -o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/protocol.m.o
+
+
+
+INFO: 2026-06-14 19:38:25.509194: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 -x objective-c -fobjc-arc -c /Users/saifalmajd/.pub-cache/hosted/pub.dev/objective_c-9.4.1/src/objective_c_bindings_generated.m -fpic -gline-tables-only -I src -o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-06-14 19:38:25.743405: 
+INFO: 2026-06-14 19:38:25.743420: 
+INFO: 2026-06-14 19:38:25.743429: Generated /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/observer.m.o
+
+pi_dl.c.o
+
+INFO: 2026-06-14 19:38:25.746858: 
+INFO: 2026-06-14 19:38:25.746927: 
+INFO: 2026-06-14 19:38:25.746965: Generated /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/protocol.m.o
+
+INFO: 2026-06-14 19:38:26.024124: 
+INFO: 2026-06-14 19:38:26.024167: 
+INFO: 2026-06-14 19:38:26.024179: Generated /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/ns_number.m.o
+
+INFO: 2026-06-14 19:38:26.030850: 
+INFO: 2026-06-14 19:38:26.030895: 
+INFO: 2026-06-14 19:38:26.030938: Generated /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.m.o
+
+INFO: 2026-06-14 19:38:26.036037: 
+INFO: 2026-06-14 19:38:26.036071: 
+INFO: 2026-06-14 19:38:26.036082: Generated /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/input_stream_adapter.m.o
+
+INFO: 2026-06-14 19:38:26.052864: 
+INFO: 2026-06-14 19:38:26.052902: 
+INFO: 2026-06-14 19:38:26.052913: Generated /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c_bindings_generated.m.o
+
+INFO: 2026-06-14 19:38:26.053323: Running: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang -shared -Wl,-encryptable -undefined dynamic_lookup -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX26.2.sdk -target arm64-apple-darwin -mmacos-version-min=13 /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/include/dart_api_dl.c.o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.c.o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/input_stream_adapter.m.o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c.m.o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/observer.m.o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/ns_number.m.o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/protocol.m.o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/obj/src/objective_c_bindings_generated.m.o -o /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/objective_c.dylib
+
+INFO: 2026-06-14 19:38:26.196465: 
+INFO: 2026-06-14 19:38:26.196529: 
+INFO: 2026-06-14 19:38:26.196543: Generated /Users/saifalmajd/saif/flutter_iot_shield/.dart_tool/hooks_runner/shared/objective_c/build/7ad245dadc/objective_c.dylib
+
