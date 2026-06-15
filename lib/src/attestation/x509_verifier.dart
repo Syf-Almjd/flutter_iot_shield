@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'dart:typed_data';
-import '../crypto/crypto_provider.dart';
 
 /// Lightweight X.509 certificate parsed representation.
 class X509Certificate {
@@ -116,7 +115,7 @@ class DerParser {
   Uint8List readRawElement() {
     final start = _position;
     if (_position >= _bytes.length) return Uint8List(0);
-    final tag = _bytes[_position++];
+    _position++; // Skip tag
     
     // Read length
     if (_position >= _bytes.length) return Uint8List(0);

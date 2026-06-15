@@ -1,0 +1,29 @@
+# https://dart.dev/guides/libraries/private-files
+
+# Created by https://www.toptal.com/developers/gitignore/api/flutter,dart
+# Edit at https://www.toptal.com/developers/gitignore?templates=flutter,dart
+
+### Dart ###
+# Don't commit the pubspec.lock file for packages (unless you need to lock down versions)
+# pubspec.lock
+
+# Dependency resolution files
+.dart_tool/
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+.project
+.classpath
+.factorypath
+
+# Build artifacts
+build/
+
+# IDEs
+.idea/
+.vscode/
+*.app
+*.o
+*.pyc
+*.log
+.DS_Store
