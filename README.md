@@ -240,13 +240,25 @@ For more details and information about the package usage, refer to the [GitHub r
 
 If you encounter issues or have improvement suggestions, [open an issue](https://github.com/Syf-Almjd/flutter_iot_shield/issues) on GitHub.
 
-##
 
-<h2 align="center">💙 Support IoT Security Development 💙</h2>
+
+## 🌻 License
+
+This project is open-source software licensed under the [MIT License](LICENSE.md).
+
+---
+
+
+
+
+<h4 align="center">Support Open Source Development</h4>
 
 <div align="center">
 
 [![Sponsor on GitHub](https://img.shields.io/badge/Sponsor-GitHub-ea4aaa?style=for-the-badge&logo=github)](https://github.com/sponsors/Syf-Almjd)
 
 </div>
+<p align="center">
+  Created with 💙 by <a href="https://github.com/Syf-Almjd">SaifAlmajd</a>
+</p>
 
