@@ -174,7 +174,7 @@ class FirmwareVerifier {
     // 4c. Signature verification (when key is provided and manifest has signature)
     if (publicKeyPem != null && signature != null) {
       final sigValid = await _verifySignature(
-        dataHash: hash_bytes_from_hex(hashHex),
+        dataHash: _hashBytesFromHex(hashHex),
         signatureBase64: signature,
       );
       if (!sigValid) {
@@ -238,7 +238,7 @@ class FirmwareVerifier {
     }
   }
 
-  List<int> hash_bytes_from_hex(String hex) {
+  List<int> _hashBytesFromHex(String hex) {
     final result = <int>[];
     for (var i = 0; i < hex.length; i += 2) {
       result.add(int.parse(hex.substring(i, i + 2), radix: 16));

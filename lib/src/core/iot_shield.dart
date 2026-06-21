@@ -64,6 +64,12 @@ class IoTShield implements IoTSecureChannel {
   IoTShieldConfig? _config;
   bool _initialized = false;
 
+  /// Returns the active configuration used to initialize the shield.
+  IoTShieldConfig get config {
+    _assertInitialized();
+    return _config!;
+  }
+
   // ─── Legacy Subsystems ─────────────────────────────────────────────────────
   late final TrustManager _trustManager;
   late final SecurePairingManager _pairingManager;

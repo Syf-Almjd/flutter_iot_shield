@@ -8,19 +8,29 @@ import 'x509_verifier.dart';
 
 /// The result of a cryptographic device attestation attempt.
 class AttestationResult {
+  /// Whether the device attestation verification succeeded.
   final bool isValid;
+
+  /// The reason why attestation failed, or null if successful.
   final String? reason;
+
+  /// The parsed device certificate, or null if attestation failed.
   final X509Certificate? deviceCertificate;
+
+  /// The device public key extracted from the certificate, or null if attestation failed.
   final Uint8List? devicePublicKey;
 
+  /// Internal constructor for creating an [AttestationResult].
   const AttestationResult._(this.isValid, this.reason, this.deviceCertificate, this.devicePublicKey);
 
+  /// Creates a successful [AttestationResult] containing the [deviceCertificate] and [devicePublicKey].
   factory AttestationResult.success({
     required X509Certificate deviceCertificate,
     required Uint8List devicePublicKey,
   }) =>
       AttestationResult._(true, null, deviceCertificate, devicePublicKey);
 
+  /// Creates a failed [AttestationResult] with a specified failure [reason].
   factory AttestationResult.failure(String reason) =>
       AttestationResult._(false, reason, null, null);
 }

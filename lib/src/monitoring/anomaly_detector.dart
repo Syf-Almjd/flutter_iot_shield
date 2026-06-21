@@ -32,6 +32,9 @@ class AnomalyDetector {
   final List<_ConnectionRecord> _records = [];
   final SecurityEventBus _bus;
 
+  /// Creates an [AnomalyDetector] with an optional custom [SecurityEventBus].
+  ///
+  /// If [bus] is not provided, it defaults to the shared [SecurityEventBus.instance].
   AnomalyDetector({SecurityEventBus? bus})
       : _bus = bus ?? SecurityEventBus.instance;
 
@@ -132,6 +135,7 @@ class AnomalyDetector {
     _records.removeWhere((r) => r.timestamp.isBefore(cutoff));
   }
 
+  /// Resets the detector's tracking records and counters to their initial states.
   void reset() {
     _records.clear();
     _scanEventCount = 0;

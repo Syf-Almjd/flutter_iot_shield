@@ -14,6 +14,7 @@ abstract class IoTSecurityException implements Exception {
 
 /// Thrown when device attestation fails.
 class AttestationException extends IoTSecurityException {
+  /// Creates an [AttestationException] with a [message], and optional error [code] and [originalError].
   const AttestationException(super.message, {super.code, super.originalError});
 }
 

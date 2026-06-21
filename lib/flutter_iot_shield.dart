@@ -1,6 +1,16 @@
 // flutter_iot_shield/lib/flutter_iot_shield.dart
 // Public barrel file — the only import needed by consuming apps.
 
+/// A robust, enterprise-grade IoT security layer for Flutter applications.
+///
+/// Provides end-to-end security utilities including:
+/// - Cryptographically secure BLE session keys (ECDH + AES-256-GCM)
+/// - Anti-replay sliding-window sequence tracking
+/// - X.509 device identity attestation
+/// - Secure platform channel sanitization
+/// - Firmware package verification (anti-downgrade & ECDSA signatures)
+/// - Local secure credentials storage
+/// - Real-time security anomaly monitoring
 library flutter_iot_shield;
 
 // Core
@@ -9,6 +19,10 @@ export 'src/core/iot_shield_config.dart';
 export 'src/core/iot_shield_logger.dart';
 export 'src/core/security_event.dart';
 export 'src/core/iot_secure_channel.dart';
+
+// Attestation
+export 'src/attestation/device_attestation.dart';
+export 'src/attestation/x509_verifier.dart';
 
 // Crypto
 export 'src/crypto/session_key_manager.dart';
