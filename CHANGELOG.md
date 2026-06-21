@@ -1,5 +1,10 @@
 # Changelog
 
+
+## 1.2.1
+
+- Refactor readme file 
+
 ## 1.1.0
 
 - Add support for [GitHub Sponsors](https://github.com/sponsors/Syf-Almjd)

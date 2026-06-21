@@ -3,7 +3,6 @@
 <p align="center">
   <a href="https://pub.dev/packages/flutter_iot_shield"><img src="https://img.shields.io/pub/v/flutter_iot_shield?label=Pub&logo=dart" alt="Pub Package" /></a>
   <a href="https://github.com/Syf-Almjd/flutter_iot_shield"><img src="https://img.shields.io/github/stars/Syf-Almjd/flutter_iot_shield.svg?style=flat&logo=github&colorB=deeppink&label=Stars" alt="Star on Github" /></a>
-  <a href="https://github.com/Syf-Almjd/flutter_iot_shield"><img src="https://img.shields.io/github/forks/Syf-Almjd/flutter_iot_shield?color=orange&label=Forks&logo=github" alt="Forks on Github" /></a>
   <a href="https://github.com/Syf-Almjd/flutter_iot_shield"><img src="https://img.shields.io/github/contributors/Syf-Almjd/flutter_iot_shield.svg?style=flat&logo=github&colorB=yellow&label=Contributors" alt="Contributors" /></a>
   <a href="https://github.com/Syf-Almjd/flutter_iot_shield"><img src="https://img.shields.io/github/languages/code-size/Syf-Almjd/flutter_iot_shield?logo=github&color=blue&label=Size" alt="Code size" /></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/Syf-Almjd/flutter_iot_shield?label=License&color=red&logo=Leanpub" alt="License: MIT" /></a>
