@@ -1,29 +1,45 @@
-# 🛡️ flutter_iot_shield
+# <h1 align="center">🛡️ Flutter IoT Shield 🛡️</h1>
 
-[![pub package](https://img.shields.io/pub/v/flutter_iot_shield.svg?color=blue)](https://pub.dev/packages/flutter_iot_shield)
-[![License: MIT](https://img.shields.io/badge/License-MIT-purple.svg)](https://opensource.org/licenses/MIT)
-[![Flutter Platform Support](https://img.shields.io/badge/platform-ios%20%7C%20android%20%7C%20macos%20%7C%20windows%20%7C%20linux-blue)](https://pub.dev/packages/flutter_iot_shield)
-[![Dart Version Support](https://img.shields.io/badge/dart-%3E%3D3.0.0-teal)](https://dart.dev)
+<p align="center">
+  <a href="https://pub.dev/packages/flutter_iot_shield"><img src="https://img.shields.io/pub/v/flutter_iot_shield?label=Pub&logo=dart" alt="Pub Package" /></a>
+  <a href="https://github.com/Syf-Almjd/flutter_iot_shield"><img src="https://img.shields.io/github/stars/Syf-Almjd/flutter_iot_shield.svg?style=flat&logo=github&colorB=deeppink&label=Stars" alt="Star on Github" /></a>
+  <a href="https://github.com/Syf-Almjd/flutter_iot_shield"><img src="https://img.shields.io/github/forks/Syf-Almjd/flutter_iot_shield?color=orange&label=Forks&logo=github" alt="Forks on Github" /></a>
+  <a href="https://github.com/Syf-Almjd/flutter_iot_shield"><img src="https://img.shields.io/github/contributors/Syf-Almjd/flutter_iot_shield.svg?style=flat&logo=github&colorB=yellow&label=Contributors" alt="Contributors" /></a>
+  <a href="https://github.com/Syf-Almjd/flutter_iot_shield"><img src="https://img.shields.io/github/languages/code-size/Syf-Almjd/flutter_iot_shield?logo=github&color=blue&label=Size" alt="Code size" /></a>
+  <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/github/license/Syf-Almjd/flutter_iot_shield?label=License&color=red&logo=Leanpub" alt="License: MIT" /></a>
+  <a href="https://pub.dev/packages/flutter_iot_shield"><img src="https://img.shields.io/badge/Platform-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Windows%20%7C%20Linux%20-blue.svg?logo=flutter" alt="Platform" /></a>
+</p>
 
-An enterprise-grade, lightweight security layer for Flutter applications communicating with BLE (Bluetooth Low Energy) smart devices. 
+An enterprise-grade, lightweight security layer for Flutter applications communicating with BLE (Bluetooth Low Energy) smart devices. This package integrates multiple cybersecurity practices to secure sensitive local user data and communication channels.
 
-`flutter_iot_shield` shields your IoT applications by establishing encrypted secure channels, validating device identities via cryptographic attestation, enforcing replay attack protections, verifying firmware package signatures before flashing, and sanitizing BLE input channels.
+## Features
 
----
+#### 🔐 ECDH Key Exchange & Symmetric Encryption (AES-256-GCM)
+#### 📜 X.509 Device Identity Attestation
+#### 🛡️ Anti-Replay Sliding Window Protection
+#### ⚙️ Secure Firmware Verification & Rollback Prevention
+#### ⚡ Real-Time Anomaly & Scan Rate Monitoring
+#### 🔒 Cryptographically Secure Key Store
+#### 📊 Telemetry & Health Data Sanitization
 
-## 🌟 Key Features
+##
+# 📖 Getting Started
 
-*   🔑 **Cryptographic Secure Channel**: Implements ECDH key exchange (Curve25519) and HKDF key derivation to derive unique session keys, enabling AES-256-GCM authenticated encryption.
-*   🛡️ **Anti-Replay Attack Protection**: Implements a sliding window sequence-tracking algorithm to detect and discard replayed or out-of-order payloads.
-*   📜 **X.509 Device Attestation**: Authenticates BLE device credentials by verifying custom challenge signatures against an X.509 certificate chain signed by your Root Certificate Authority.
-*   ⚙️ **Firmware Signature Verification**: Ensures OTA firmware updates are authentic by checking Ed25519 digital signatures and enforcing anti-downgrade policies.
-*   📊 **Biometric & Telemetry Validation**: Decodes, sanitizes, and verifies BLE values against configurable schemas and threshold limits (e.g. heartbeat ranges, body temperature bounds) to block bad data injection.
-*   🔒 **Secure Key Storage**: Offloads local security keys and configurations safely using secure platform-specific hardware keystores (leveraging `flutter_secure_storage`).
-*   🚨 **Security Monitoring & Event Bus**: Detects and broadcasts real-time anomalies (e.g. connection storms, device spoofing, packet duplication) directly to the parent app via the [SecurityEventBus](file:///Users/saifalmajd/saif/flutter_iot_shield/lib/src/monitoring/security_event_bus.dart).
+To use this package, add `flutter_iot_shield` as a dependency in your `pubspec.yaml` file:
 
----
+```yaml
+dependencies:
+  flutter_iot_shield: ^1.0.0
+```
 
-## 📐 Architecture Overview
+Then import the necessary features in your Dart code:
+
+```dart
+import 'package:flutter_iot_shield/flutter_iot_shield.dart';
+```
+
+##
+# 📐 Architecture Overview
 
 ```mermaid
 flowchart TD
@@ -42,30 +58,14 @@ flowchart TD
         Shield <--> Firmware[Firmware Verifier: Ed25519 + manifest]
     end
     
-    App BLE[BLE Core Service] <--> |Encrypted Packets| IoT[IoT / BLE Smart Device]
+    App <--> |BLE Core Service| IoT[IoT / BLE Smart Device]
 ```
 
----
+##
+# Features & Code Examples
+##
 
-## 🚀 Installation
-
-Add `flutter_iot_shield` to your `pubspec.yaml`:
-
-```yaml
-dependencies:
-  flutter_iot_shield: ^1.0.0
-```
-
-And run:
-```bash
-flutter pub get
-```
-
----
-
-## 📖 Quick Start
-
-### 1. Initialize the Security Engine
+## 🔐 Initialization
 
 Initialize the [IoTShield](file:///Users/saifalmajd/saif/flutter_iot_shield/lib/src/core/iot_shield.dart) singleton once in your application initialization sequence (e.g., inside `main.dart`):
 
@@ -90,7 +90,9 @@ void main() async {
 }
 ```
 
-### 2. Verify and Trust a Connecting Device
+##
+
+## 🔑 Device Trust Assessment
 
 Assess the risk level of an advertising BLE device before pairing:
 
@@ -112,11 +114,16 @@ if (trustLevel == TrustLevel.suspicious) {
 }
 ```
 
-### 3. Establish a Secure Pairing Session (ECDH + Attestation)
+##
+
+## 🧑✋ ECDH Secure Channel & X.509 Attestation
 
 Derive shared session keys and verify the cryptographic signature challenge using the device certificate:
 
 ```dart
+import 'dart:typed_data';
+import 'package:flutter_iot_shield/flutter_iot_shield.dart';
+
 try {
   final session = await IoTShield.instance.pairDevice(
     '00:11:22:33:AA:BB',
@@ -133,11 +140,16 @@ try {
 }
 ```
 
-### 4. Send and Receive Encrypted Packets
+##
+
+## 🔒 Symmetric Encryption & Decryption (AES-256-GCM)
 
 Encrypt command payloads using AES-256-GCM and protect them against replay attacks:
 
 ```dart
+import 'dart:typed_data';
+import 'package:flutter_iot_shield/flutter_iot_shield.dart';
+
 // 1. Encrypt outgoing command payload
 final SecurePacket packet = await IoTShield.instance.encrypt(
   Uint8List.fromList([0x01, 0x02, 0x03]), // plaintext command bytes
@@ -151,7 +163,7 @@ final SecurePacket packet = await IoTShield.instance.encrypt(
 // 2. Decrypt incoming data packet from the device
 try {
   final Uint8List plaintext = await IoTShield.instance.decrypt(
-    receivedPacket, // parsed SecurePacket containing ciphertext, iv, and mac
+    packet, // parsed SecurePacket containing ciphertext, iv, and mac
     '00:11:22:33:AA:BB',
   );
   print('Decrypted bytes: $plaintext');
@@ -160,57 +172,168 @@ try {
 }
 ```
 
-### 5. Intercept Live Security Events
+##
 
-Subscribe to the global event stream to alert administrators of anomalous events:
+## ⚡ Real-Time Anomaly & Scan Rate Monitoring
+
+The [AnomalyDetector](file:///Users/saifalmajd/saif/flutter_iot_shield/lib/src/monitoring/anomaly_detector.dart) monitors connection trends to emit alerts for reconnection storms, device switching, or high scanning activity:
+
+```dart
+import 'package:flutter_iot_shield/flutter_iot_shield.dart';
+
+// Access the detector
+final detector = IoTShield.instance.anomalyDetector;
+
+// Record connection events
+detector.recordConnect('00:11:22:33:AA:BB');
+detector.recordDisconnect('00:11:22:33:AA:BB');
+
+// Record scan events to track scanning frequency
+detector.recordScanEvent();
+```
+
+To capture and act on security events globally, subscribe to the global stream:
 
 ```dart
 IoTShield.instance.securityEvents.listen((SecurityEvent event) {
-  switch (event.severity) {
-    case SecuritySeverity.info:
-      print('Log: ${event.message}');
-      break;
-    case SecuritySeverity.warning:
-      print('Warning: ${event.message} - Meta: ${event.meta}');
-      break;
-    case SecuritySeverity.critical:
-      print('🔴 CRITICAL ALERT: ${event.message}');
-      // Trigger emergency lock down, log to SIEM, or disconnect device
-      break;
+  if (event.severity == SecuritySeverity.critical) {
+    print('🚨 CRITICAL SECURITY EVENT: ${event.message}');
+    print('Metadata: ${event.metadata}');
   }
 });
 ```
 
----
+##
 
-## 🛠️ Security Subsystems
+## ⚙️ Secure Firmware Verification
 
-### 🛡️ Sliding Window Replay Protection
-`flutter_iot_shield` uses a tracking sliding window sequence filter. An incoming packet's sequence number must be within a safe window. Duplicate sequence numbers within the window are rejected, and sequence numbers older than the window limits are immediately dropped.
+Ensure OTA firmware updates are authentic by checking digital signatures and enforcing anti-rollback version checks:
 
-### 🛡️ Real-Time Anomaly Detection
-The [AnomalyDetector](file:///Users/saifalmajd/saif/flutter_iot_shield/lib/src/monitoring/anomaly_detector.dart) monitors events locally. It triggers alerts if it detects:
-- **Reconnection Storms**: Too many reconnect requests within a 2-minute window (indicates compromised hardware or intermediate relay hijack).
-- **Device Impersonation**: Rapid switching of multiple devices trying to authenticate on the same client in a 1-minute window.
-- **High Scan Rates**: Excessive scanning frequency indicating rogue packet sniffers.
+```dart
+import 'dart:typed_data';
+import 'package:flutter_iot_shield/flutter_iot_shield.dart';
 
-### 🛡️ Firmware Verification
-Verifies signed firmware ZIP OTA packages containing a `manifest.json` signature block using an Ed25519 verification algorithm. Prevents downgrading the watch firmware (anti-rollback) and guarantees image authenticity.
+final metadata = FirmwareMetadata(
+  currentVersion: '1.1.0',
+  hardwareId: 'WatchPro_X1',
+);
 
----
+final result = await IoTShield.instance.verifyFirmware(
+  firmwareZipBytes,
+  metadata,
+);
 
-## 👥 Credits
+if (result is FirmwareVerified) {
+  print('✓ Firmware image verification passed. Version: ${result.version}');
+} else if (result is FirmwareRejected) {
+  print('❌ Firmware verification rejected: ${result.reason}');
+}
+```
 
-This package was developed, polished, and structured for release by:
+##
+## Release Notes
 
-**SaifAlmajd**
-*   GitHub: [@Syf-Almjd](https://github.com/Syf-Almjd)
-*   Role: Creator and Lead Maintainer
+### Version 1.0.0
+- Initial release of the Flutter IoT Shield library, supporting enterprise-grade end-to-end security layers for BLE communications.
+- Complete support for ECDH Curve25519 session keys, AES-256-GCM encryption, X509 certificate parsing, anti-rollback firmware checks, sliding-window anti-replay, and real-time event alerts.
 
-Feel free to open issues or pull requests on the [GitHub Repository](https://github.com/Syf-Almjd/flutter_iot_shield) to contribute!
+For more details and information about the package usage, refer to the [GitHub repository](https://github.com/Syf-Almjd/flutter_iot_shield).
 
----
+If you encounter issues or have improvement suggestions, [open an issue](https://github.com/Syf-Almjd/flutter_iot_shield/issues) on GitHub.
 
-## 📄 License
+##
 
-This project is licensed under the MIT License - see the [LICENSE](file:///Users/saifalmajd/saif/flutter_iot_shield/LICENSE) file for details.
+<h2 align="center">💙 Support IoT Security Development 💙</h2>
+
+<div align="center">
+
+[![Buy Me A Coffee](https://user-images.githubusercontent.com/26390946/161375563-69c634fd-89d2-45ac-addd-931b03996b34.png)](https://www.buymeacoffee.com/saifalmajdalmassri)
+[![Ko-fi](https://user-images.githubusercontent.com/26390946/161375565-e7d64410-bbcf-4a28-896b-7514e106478e.png)](https://ko-fi.com/saifalmajdalmassri)
+
+</div>
+
+##
+
+# <h2 align="center">👨💻 Framework Developer Profile 👨💻</h2>
+<h1 align="center">Hi 👋, I'm Saif Almajd</h1>
+<p align="center"> <img src="https://komarev.com/ghpvc/?username=syf-almjd&label=Profile%20views&color=0eb48b" alt="syf-almjd" /> </p>
+<h3 align="center">Passionate of Full Stack Mobile/Web Development</h3>
+<p align="center"> 
+  <a href="https://instagram.com/saif_almajd" target="blank"><img src="https://img.shields.io/twitter/follow/SaifAlmajd?logo=instagram&style=for-the-badge" alt="saif_almajd" /></a> 
+  <a href="https://github.com/Syf-Almjd" target="blank"><img src="https://img.shields.io/twitter/follow/Syf-Almjd?logo=github&style=for-the-badge" alt="saif_almajd" /></a> 
+  <a href="https://www.linkedin.com/in/saif-almajd/" target="blank"><img src="https://img.shields.io/twitter/follow/SaifAlmajd?logo=linkedin&style=for-the-badge" alt="saif_almajd" /></a> 
+  <a href="https://twitter.com/hsaifalmajd" target="blank"><img src="https://img.shields.io/twitter/follow/hsaifalmajd?logo=twitter&style=for-the-badge" alt="hsaifalmajd" /></a>
+  <a href="https://pub.dev/publishers/saifalmajd.blogspot.com/packages" target="blank"><img src="https://img.shields.io/twitter/follow/saifalmajd?logo=dart&style=for-the-badge" alt="saifalmajd" /></a>
+</p>
+
+<p align="center"> 
+  <img src="https://github-readme-stats.vercel.app/api?username=syf-almjd&show_icons=true&hide_border=true&locale=en" alt="syf-almjd"/>
+  <img src="https://github-readme-stats.vercel.app/api/top-langs?username=syf-almjd&show_icons=true&hide_border=true&locale=en&layout=compact" alt="syf-almjd"/>
+</p>
+
+<h3 align="center">Favourite Languages and Tools:</h3>
+<p align="center"> 
+  <a href="https://developer.android.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/android/android-original-wordmark.svg" alt="android" width="40" height="40"/> </a> 
+  <a href="https://dart.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/dartlang/dartlang-icon.svg" alt="dart" width="40" height="40"/> </a> 
+  <a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> 
+  <a href="https://firebase.google.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/firebase/firebase-icon.svg" alt="firebase" width="40" height="40"/> </a> 
+  <a href="https://flutter.dev" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="40" height="40"/>  </a> 
+</p>
+
+- 🔭 I’m currently working on [Flutter IoT Shield](https://github.com/Syf-Almjd/flutter_iot_shield)
+
+- 🌱 I’m currently learning **Springboot, Dart Servers**
+
+- 👨💻 All of my projects are available at [SaifAlmajd.web.app/](https://saifalmajd.web.app/)
+
+- 💬 Ask me about **Flutter, Java, Data Structure & Algorithms**
+
+- 📫 How to reach me **syfalmjd11@gmail.com**
+
+- ⚡ Fun fact **I am an AspireX Leadership Alumni :)**
+
+<h1></h1>
+
+I proudly embrace my roles as a Developer, Leader, and Believer in our shared journey toward a better humanity 🌎.
+
+👨🏻💻 As a committed computer science professional and visionary leader, my mission is to harness the potential of technology to uplift humanity and leave a positive imprint on our world. In my capacity as the Manager of MJD Foundation, my focus is unwavering – I endeavor to craft ingenious tools that enhance and simplify the lives of everyone.
+
+## 🔧 Expertise
+
+- 💼 **Mobile Development**: Passionately expanding my expertise in mobile development to create user-friendly and innovative solutions.
+
+- 🔒 **Cybersecurity**: Committed to ensuring the safety and security of digital landscapes in an increasingly connected world.
+- 🚀 **Project Management and Leadership**: Proficiently orchestrating projects from inception to completion, optimizing resources, and leading cross-functional teams to deliver successful outcomes.
+
+## 🌱 Continuous Learning
+
+My unwavering belief in the power of continuous learning drives me to stay at the forefront of the latest advancements in the field.
+
+## 💪 Versatility
+
+With a background as a seasoned software engineer, I possess the versatility to navigate diverse platforms and excel in both written and verbal communication. My precision-oriented approach enables me to demystify intricate software challenges into easily digestible concepts.
+
+## 🤝 Collaboration
+
+I am actively seeking collaborative opportunities in the domains of Flutter, Dart, Cybersecurity, and Mobile Development. If you share my enthusiasm for creating groundbreaking solutions, please don't hesitate to reach out to me at [syfalmjd11@gmail.com](mailto:syfalmjd11@gmail.com).
+
+Let's join forces and shape technology into a more human-centric and empowering force for our global community! 🌎
+
+<h3 align="center">Connect with Me:</h3>
+<p align="center">
+  <a href="https://twitter.com/hsaifalmajd" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/twitter.svg" alt="hsaifalmajd" height="30" width="40" /></a>
+  <a href="https://linkedin.com/in/saif-almajd" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="saif-almajd" height="30" width="40" /></a>
+  <a href="https://stackoverflow.com/users/19370215" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/stack-overflow.svg" alt="19370215" height="30" width="40" /></a>
+  <a href="https://instagram.com/saif_almajd/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="saif_almajd/" height="30" width="40" /></a>
+  <a href="https://dribbble.com/saifalmajd" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/dribbble.svg" alt="saifalmajd" height="30" width="40" /></a>
+  <a href="https://hashnode.com/@saifalmajd" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/hashnode.svg" alt="@saifalmajd" height="30" width="40" /></a>
+  <a href="https://auth.geeksforgeeks.org/user/syfalm4h6f" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/geeks-for-geeks.svg" alt="syfalm4h6f" height="30" width="40" /></a>
+  <a href="/https://github.com/syf-almjd.atom" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/rss.svg" alt="https://github.com/syf-almjd.atom" height="30" width="40" /></a>
+</p>
+
+<h3 align="center">Support:</h3>
+<p align="center"> 
+  <a href="https://www.buymeacoffee.com/saifalmajdalmassri"> <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" height="50" width="210" alt="https://www.buymeacoffee.com/saifalmajdalmassri" /></a>
+  <a href="https://ko-fi.com/saifalmajdalmassri"> &nbsp; <img src="https://cdn.ko-fi.com/cdn/kofi3.png?v=3" height="50" width="210" alt="https://ko-fi.com/saifalmajdalmassri" /></a>
+</p>
+<br><br>
