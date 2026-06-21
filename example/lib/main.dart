@@ -8,7 +8,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // 1. Initialize the IoT Shield singleton
-  final config = IoTShieldConfig(
+  const config = IoTShieldConfig(
     appId: 'com.saifalmajd.iotshield.demo',
     verboseLogging: true,
     firmwarePublicKey: '-----BEGIN PUBLIC KEY-----\n'
@@ -51,7 +51,8 @@ class SecurityDashboardScreen extends StatefulWidget {
   const SecurityDashboardScreen({super.key});
 
   @override
-  State<SecurityDashboardScreen> createState() => _SecurityDashboardScreenState();
+  State<SecurityDashboardScreen> createState() =>
+      _SecurityDashboardScreenState();
 }
 
 class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
@@ -60,10 +61,11 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
   // Active session variables
   SecureSession? _activeSession;
   bool _isPairing = false;
-  String _deviceId = 'device-mac-00:11:22:33:aa:bb';
+  final String _deviceId = 'device-mac-00:11:22:33:aa:bb';
 
   // Encryption playground variables
-  final TextEditingController _messageController = TextEditingController(text: 'Secret payload message');
+  final TextEditingController _messageController =
+      TextEditingController(text: 'Secret payload message');
   String _encryptedHex = '';
   String _decryptedPlaintext = '';
   SecurePacket? _lastEncryptedPacket;
@@ -123,7 +125,8 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
         _activeSession = session;
         _isPairing = false;
       });
-      _log('✓ Secure session established! Session ID: ${session.sessionId.substring(0, 8)}...');
+      _log(
+          '✓ Secure session established! Session ID: ${session.sessionId.substring(0, 8)}...');
     } catch (e) {
       setState(() {
         _isPairing = false;
@@ -140,7 +143,8 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
     }
 
     try {
-      final plaintextBytes = Uint8List.fromList(utf8.encode(_messageController.text));
+      final plaintextBytes =
+          Uint8List.fromList(utf8.encode(_messageController.text));
       final packet = await IoTShield.instance.encrypt(
         plaintextBytes,
         _deviceId,
@@ -150,11 +154,14 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
 
       setState(() {
         _lastEncryptedPacket = packet;
-        _encryptedHex = packet.encryptedPayload.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+        _encryptedHex = packet.encryptedPayload
+            .map((b) => b.toRadixString(16).padLeft(2, '0'))
+            .join();
         _decryptedPlaintext = '';
       });
 
-      _log('Packet encrypted. Seq: ${packet.sequence}, IV: ${packet.nonce.map((b) => b.toRadixString(16).padLeft(2, '0')).join().substring(0, 10)}...');
+      _log(
+          'Packet encrypted. Seq: ${packet.sequence}, IV: ${packet.nonce.map((b) => b.toRadixString(16).padLeft(2, '0')).join().substring(0, 10)}...');
     } catch (e) {
       _log('❌ Encryption failed: $e');
     }
@@ -189,7 +196,8 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
       return;
     }
 
-    _log('😈 Injecting replayed packet with Seq: ${_lastEncryptedPacket!.sequence}...');
+    _log(
+        '😈 Injecting replayed packet with Seq: ${_lastEncryptedPacket!.sequence}...');
     try {
       await IoTShield.instance.decrypt(
         _lastEncryptedPacket!,
@@ -197,7 +205,8 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
       );
       _log('❌ Security flaw: Replayed packet was accepted!');
     } catch (e) {
-      _log('✓ Replay protection successful: Blocked duplicate packet! Error: $e');
+      _log(
+          '✓ Replay protection successful: Blocked duplicate packet! Error: $e');
     }
   }
 
@@ -235,11 +244,12 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
     // For simplicity, we can directly test the fallback raw binary case (manifest verification skipped).
     final result = await verifier.verify(firmwareFile);
     if (result is FirmwareVerified) {
-      _log('✓ Firmware file verification PASSED. Model: ${result.targetModel}, Version: ${result.version}');
+      _log(
+          '✓ Firmware file verification PASSED. Model: ${result.targetModel}, Version: ${result.version}');
     } else if (result is FirmwareRejected) {
       _log('❌ Firmware file verification REJECTED: ${result.reason}');
     }
-    
+
     // Clean up
     tempDir.deleteSync(recursive: true);
   }
@@ -311,19 +321,27 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
               children: [
                 const Text(
                   '🔐 BLE Session Cryptography (ECDH)',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFF0EA5E9)),
+                  style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF0EA5E9)),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   decoration: BoxDecoration(
-                    color: hasSession ? const Color(0x334CAF50) : const Color(0x33FFC107),
+                    color: hasSession
+                        ? const Color(0x334CAF50)
+                        : const Color(0x33FFC107),
                     borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: hasSession ? Colors.green : Colors.amber),
+                    border: Border.all(
+                        color: hasSession ? Colors.green : Colors.amber),
                   ),
                   child: Text(
                     hasSession ? 'PAIRED / SECURE' : 'UNSECURED',
                     style: TextStyle(
-                      color: hasSession ? Colors.greenAccent : Colors.amberAccent,
+                      color:
+                          hasSession ? Colors.greenAccent : Colors.amberAccent,
                       fontWeight: FontWeight.bold,
                       fontSize: 12,
                     ),
@@ -338,7 +356,10 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
               Text(
                 'Derived Shared Session Key (AES-GCM):\n'
                 '${_activeSession!.encryptionKey.map((b) => b.toRadixString(16).padLeft(2, '0')).join().substring(0, 32)}...',
-                style: const TextStyle(fontFamily: 'monospace', fontSize: 12, color: Colors.white70),
+                style: const TextStyle(
+                    fontFamily: 'monospace',
+                    fontSize: 12,
+                    color: Colors.white70),
               ),
             ],
             const SizedBox(height: 12),
@@ -352,9 +373,12 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
                   ? const SizedBox(
                       height: 20,
                       width: 20,
-                      child: CircularProgressIndicator(color: Colors.white, strokeWidth: 2),
+                      child: CircularProgressIndicator(
+                          color: Colors.white, strokeWidth: 2),
                     )
-                  : Text(hasSession ? 'Refresh Session Key' : 'Establish ECDH Secure Channel'),
+                  : Text(hasSession
+                      ? 'Refresh Session Key'
+                      : 'Establish ECDH Secure Channel'),
             ),
           ],
         ),
@@ -371,7 +395,10 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
           children: [
             const Text(
               '📦 Encrypted Messaging Playground (AES-256-GCM)',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Color(0xFFA855F7)),
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFFA855F7)),
             ),
             const SizedBox(height: 12),
             TextField(
@@ -388,15 +415,20 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: _activeSession == null ? null : _encryptMessage,
-                    style: ElevatedButton.styleFrom(backgroundColor: const Color(0xFFA855F7), foregroundColor: Colors.white),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFA855F7),
+                        foregroundColor: Colors.white),
                     child: const Text('Encrypt Payload'),
                   ),
                 ),
                 const SizedBox(width: 8),
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: _lastEncryptedPacket == null ? null : _decryptMessage,
-                    style: ElevatedButton.styleFrom(backgroundColor: Colors.teal, foregroundColor: Colors.white),
+                    onPressed:
+                        _lastEncryptedPacket == null ? null : _decryptMessage,
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.teal,
+                        foregroundColor: Colors.white),
                     child: const Text('Decrypt Payload'),
                   ),
                 ),
@@ -404,7 +436,8 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
             ),
             if (_encryptedHex.isNotEmpty) ...[
               const SizedBox(height: 12),
-              const Text('Encrypted Hex String:', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Text('Encrypted Hex String:',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(8),
@@ -417,14 +450,16 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
             ],
             if (_decryptedPlaintext.isNotEmpty) ...[
               const SizedBox(height: 12),
-              const Text('Decrypted Plaintext:', style: TextStyle(fontWeight: FontWeight.bold)),
+              const Text('Decrypted Plaintext:',
+                  style: TextStyle(fontWeight: FontWeight.bold)),
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(8),
                 color: Colors.black26,
                 child: Text(
                   _decryptedPlaintext,
-                  style: const TextStyle(color: Colors.greenAccent, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                      color: Colors.greenAccent, fontWeight: FontWeight.bold),
                 ),
               ),
             ],
@@ -443,7 +478,10 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
           children: [
             const Text(
               '👿 Security Attack & Anomaly Simulator',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.orange),
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.orange),
             ),
             const SizedBox(height: 8),
             const Text(
@@ -456,32 +494,39 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
               runSpacing: 8,
               children: [
                 ActionChip(
-                  avatar: const Icon(Icons.history_toggle_off, size: 16, color: Colors.white),
+                  avatar: const Icon(Icons.history_toggle_off,
+                      size: 16, color: Colors.white),
                   label: const Text('Simulate Replay Attack'),
                   backgroundColor: const Color(0x4DFF5722),
                   side: const BorderSide(color: Colors.deepOrange),
-                  onPressed: _lastEncryptedPacket == null ? null : _simulateReplayAttack,
+                  onPressed: _lastEncryptedPacket == null
+                      ? null
+                      : _simulateReplayAttack,
                 ),
                 ActionChip(
-                  avatar: const Icon(Icons.flash_on, size: 16, color: Colors.white),
+                  avatar:
+                      const Icon(Icons.flash_on, size: 16, color: Colors.white),
                   label: const Text('Reconnect Storm'),
                   backgroundColor: const Color(0x4DF44336),
                   side: const BorderSide(color: Colors.red),
                   onPressed: _simulateReconnectStorm,
                 ),
                 ActionChip(
-                  avatar: const Icon(Icons.swap_horiz, size: 16, color: Colors.white),
+                  avatar: const Icon(Icons.swap_horiz,
+                      size: 16, color: Colors.white),
                   label: const Text('Device Impersonation'),
                   backgroundColor: const Color(0x4DF44336),
                   side: const BorderSide(color: Colors.red),
                   onPressed: _simulateDeviceSwitching,
                 ),
                 ActionChip(
-                  avatar: const Icon(Icons.system_update, size: 16, color: Colors.white),
+                  avatar: const Icon(Icons.system_update,
+                      size: 16, color: Colors.white),
                   label: const Text('Verify Firmware'),
                   backgroundColor: const Color(0x4D2196F3),
                   side: const BorderSide(color: Colors.blue),
-                  onPressed: () => _simulateFirmwareVerification(makeValid: true),
+                  onPressed: () =>
+                      _simulateFirmwareVerification(makeValid: true),
                 ),
               ],
             ),
@@ -500,7 +545,10 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
           children: [
             const Text(
               '🚨 Live Security Log & Event Bus Feed',
-              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.redAccent),
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.redAccent),
             ),
             const SizedBox(height: 12),
             Container(
@@ -525,7 +573,8 @@ class _SecurityDashboardScreenState extends State<SecurityDashboardScreen> {
                         Color textColor = Colors.white70;
                         if (log.contains('[WARNING]')) {
                           textColor = Colors.amberAccent;
-                        } else if (log.contains('[CRITICAL]') || log.contains('[ALERT]')) {
+                        } else if (log.contains('[CRITICAL]') ||
+                            log.contains('[ALERT]')) {
                           textColor = Colors.redAccent;
                         } else if (log.contains('✓')) {
                           textColor = Colors.greenAccent;

@@ -104,8 +104,7 @@ class IoTShield implements IoTSecureChannel {
     _sessionKeyManager = SessionKeyManager();
     _firmwareVerifier = FirmwareVerifier(publicKeyPem: config.firmwarePublicKey)
       ..currentDeviceModel = null;
-    _healthValidator =
-        HealthDataValidator(config: config.healthValidation);
+    _healthValidator = HealthDataValidator(config: config.healthValidation);
     _channelSanitizer = ChannelSanitizer(
       healthValidator: _healthValidator,
       extraAllowedTypes: config.extraValidEventTypes,
@@ -156,10 +155,11 @@ class IoTShield implements IoTSecureChannel {
   }) async {
     _assertInitialized();
 
-    final model = _extractString(deviceInfo, ['model', 'modelId', 'name']) ?? '';
-    final fw =
-        _extractString(deviceInfo, ['firmwareVersion', 'firmware', 'version']) ??
-            '';
+    final model =
+        _extractString(deviceInfo, ['model', 'modelId', 'name']) ?? '';
+    final fw = _extractString(
+            deviceInfo, ['firmwareVersion', 'firmware', 'version']) ??
+        '';
     final ble =
         _extractString(deviceInfo, ['bleVersion', 'ble', 'bleVer']) ?? '';
 
@@ -247,7 +247,8 @@ class IoTShield implements IoTSecureChannel {
         challengeNonce: challengeNonce,
       );
       if (!attestation.isValid) {
-        throw AttestationException(attestation.reason ?? 'Device attestation failed.');
+        throw AttestationException(
+            attestation.reason ?? 'Device attestation failed.');
       }
     }
 
@@ -304,13 +305,14 @@ class IoTShield implements IoTSecureChannel {
     }
 
     // Rotate keys if key rotation policy dictates
-    if (session.outboundCounter >= _securityConfig.keyRotationPolicy.rotateAfterPacketCount ||
+    if (session.outboundCounter >=
+            _securityConfig.keyRotationPolicy.rotateAfterPacketCount ||
         session.age >= _securityConfig.keyRotationPolicy.rotateAfterDuration) {
       await rotateKeys(deviceId);
     }
 
     final counter = session.incrementOutboundCounter();
-    
+
     // Generate fresh IV/nonce
     final iv = _cryptoProvider.randomBytes(12);
     // Embed monotonic counter in big-endian in first 4 bytes
@@ -352,9 +354,11 @@ class IoTShield implements IoTSecureChannel {
     }
 
     // Anti-replay protection sequence check
-    final validSeq = _replayProtection.validateSequence(deviceId, packet.messageCounter);
+    final validSeq =
+        _replayProtection.validateSequence(deviceId, packet.messageCounter);
     if (!validSeq) {
-      throw ReplayAttackException(packet.messageCounter, session.lastInboundCounter + 1);
+      throw ReplayAttackException(
+          packet.messageCounter, session.lastInboundCounter + 1);
     }
 
     final aad = Uint8List.fromList([packet.command, packet.sequence]);
@@ -380,12 +384,12 @@ class IoTShield implements IoTSecureChannel {
     final tempDir = Directory.systemTemp;
     final tempFile = File('${tempDir.path}/temp_fw.zip');
     await tempFile.writeAsBytes(firmwareImage);
-    
+
     _firmwareVerifier.currentFirmwareVersion = metadata.currentVersion;
     _firmwareVerifier.currentDeviceModel = metadata.hardwareId;
-    
+
     final result = await _firmwareVerifier.verify(tempFile);
-    
+
     try {
       await tempFile.delete();
     } catch (_) {}
@@ -508,8 +512,7 @@ class IoTShield implements IoTSecureChannel {
   }
 
   /// Returns the active [SecurePacketEncryptor] for a device, or null if none.
-  SecurePacketEncryptor? encryptorFor(String deviceId) =>
-      _encryptors[deviceId];
+  SecurePacketEncryptor? encryptorFor(String deviceId) => _encryptors[deviceId];
 
   // ─── Event sanitization ────────────────────────────────────────────────────
 

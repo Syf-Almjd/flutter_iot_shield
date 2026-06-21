@@ -6,7 +6,7 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
-import 'package:cryptography/cryptography.dart';
+import 'package:dart_secure/dart_secure.dart';
 
 import '../core/iot_shield_logger.dart';
 import '../core/security_event.dart';
@@ -70,9 +70,7 @@ class DeviceFingerprint {
       if (pairSecret != null) base64Encode(pairSecret),
     ].join(':');
 
-    final sha256 = Sha256();
-    final hash = await sha256.hash(utf8.encode(components));
-    final hashHex = hash.bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
+    final hashHex = hashEncrypt(plainText: components, keyIV: deviceId);
 
     IoTShieldLogger.info(
       'Device fingerprint generated for $deviceId',
@@ -123,7 +121,8 @@ class DeviceFingerprint {
 
     // Hash match = fully trusted
     if (stored.hash == current.hash) {
-      IoTShieldLogger.info('Device fingerprint verified ✓', meta: {'deviceId': current.deviceId});
+      IoTShieldLogger.info('Device fingerprint verified ✓',
+          meta: {'deviceId': current.deviceId});
       return TrustLevel.trusted;
     }
 

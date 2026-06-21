@@ -22,8 +22,10 @@ void main() {
       expect(keyPairA.publicKey, isNotEmpty);
       expect(keyPairB.publicKey, isNotEmpty);
 
-      final secretA = await crypto.computeSharedSecret(keyPairA.keyPair, keyPairB.publicKey);
-      final secretB = await crypto.computeSharedSecret(keyPairB.keyPair, keyPairA.publicKey);
+      final secretA = await crypto.computeSharedSecret(
+          keyPairA.keyPair, keyPairB.publicKey);
+      final secretB = await crypto.computeSharedSecret(
+          keyPairB.keyPair, keyPairA.publicKey);
 
       expect(secretA, equals(secretB));
       expect(secretA.length, 32);
@@ -33,7 +35,8 @@ void main() {
       final key = crypto.randomBytes(32);
       final iv = crypto.randomBytes(12);
       final aad = Uint8List.fromList(utf8.encode('associated_data'));
-      final plaintext = Uint8List.fromList(utf8.encode('Hello World! Enterprise Security.'));
+      final plaintext =
+          Uint8List.fromList(utf8.encode('Hello World! Enterprise Security.'));
 
       final encrypted = await crypto.encryptAES256GCM(
         key: key,
@@ -102,10 +105,12 @@ void main() {
     });
 
     test('Rejects packets too old (outside window)', () {
-      expect(rp.validateSequence(deviceId, 15), isTrue); // Max is now 15. Window is [6, 15]
-      expect(rp.validateSequence(deviceId, 5), isFalse);  // Too old! (<= 15 - 10)
-      expect(rp.validateSequence(deviceId, 6), isTrue);   // Edge of window, valid
-      expect(rp.validateSequence(deviceId, 4), isFalse);  // Too old!
+      expect(rp.validateSequence(deviceId, 15),
+          isTrue); // Max is now 15. Window is [6, 15]
+      expect(
+          rp.validateSequence(deviceId, 5), isFalse); // Too old! (<= 15 - 10)
+      expect(rp.validateSequence(deviceId, 6), isTrue); // Edge of window, valid
+      expect(rp.validateSequence(deviceId, 4), isFalse); // Too old!
     });
   });
 
@@ -115,7 +120,7 @@ void main() {
       final authKey = Uint8List(32);
       final ivKey = Uint8List(32);
       final rotKey = Uint8List(32);
-      
+
       final session = SecureSession(
         sessionId: 'session-id',
         deviceId: 'device-id',
@@ -130,7 +135,7 @@ void main() {
       expect(session.deviceId, 'device-id');
       expect(session.outboundCounter, 0);
       expect(session.lastInboundCounter, -1);
-      
+
       final count = session.incrementOutboundCounter();
       expect(count, 0);
       expect(session.outboundCounter, 1);

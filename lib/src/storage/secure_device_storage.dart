@@ -5,6 +5,7 @@
 
 import 'dart:convert';
 
+import 'package:dart_secure/dart_secure.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import '../core/iot_shield_logger.dart';
@@ -66,19 +67,25 @@ class SecureDeviceStorage {
   SecureDeviceStorage({FlutterSecureStorage? storage})
       : _storage = storage ??
             const FlutterSecureStorage(
-              aOptions: AndroidOptions(encryptedSharedPreferences: true),
+              aOptions: AndroidOptions(),
               iOptions: IOSOptions(
                 accessibility: KeychainAccessibility.first_unlock_this_device,
               ),
             );
 
+  String _encryptionKey(String deviceId) =>
+      deviceId.length > 32 ? deviceId.substring(0, 32) : deviceId;
+
   // ─── Device identity ─────────────────────────────────────────────────────
 
   /// Stores a device identity record securely.
   Future<void> storeDeviceIdentity(StoredDeviceIdentity identity) async {
+    final rawJson = jsonEncode(identity.toJson());
+    final encryptedVal =
+        inAppEncrypt(text: rawJson, key: _encryptionKey(identity.deviceId));
     await _storage.write(
       key: '$_kDevicePrefix${identity.deviceId}',
-      value: jsonEncode(identity.toJson()),
+      value: encryptedVal,
     );
     await _markLastActive(identity.deviceId);
     IoTShieldLogger.info(
@@ -92,8 +99,14 @@ class SecureDeviceStorage {
     try {
       final raw = await _storage.read(key: '$_kDevicePrefix$deviceId');
       if (raw == null || raw.isEmpty) return null;
+      final String jsonStr;
+      if (raw.trim().startsWith('{')) {
+        jsonStr = raw;
+      } else {
+        jsonStr = inAppDecrypt(cipherText: raw, key: _encryptionKey(deviceId));
+      }
       return StoredDeviceIdentity.fromJson(
-          jsonDecode(raw) as Map<String, dynamic>);
+          jsonDecode(jsonStr) as Map<String, dynamic>);
     } catch (e) {
       IoTShieldLogger.warn('Failed to load device identity: $e');
       return null;
@@ -107,8 +120,16 @@ class SecureDeviceStorage {
     for (final entry in all.entries) {
       if (!entry.key.startsWith(_kDevicePrefix)) continue;
       try {
+        final deviceId = entry.key.substring(_kDevicePrefix.length);
+        final String jsonStr;
+        if (entry.value.trim().startsWith('{')) {
+          jsonStr = entry.value;
+        } else {
+          jsonStr = inAppDecrypt(
+              cipherText: entry.value, key: _encryptionKey(deviceId));
+        }
         final identity = StoredDeviceIdentity.fromJson(
-            jsonDecode(entry.value) as Map<String, dynamic>);
+            jsonDecode(jsonStr) as Map<String, dynamic>);
         result.add(identity);
       } catch (_) {
         // Skip corrupted entries
@@ -172,8 +193,7 @@ class SecureDeviceStorage {
   /// Migrates existing device data from SharedPreferences to secure storage.
   /// [prefs] should be a map of the existing SharedPreferences values.
   Future<void> migrateFromPrefs(Map<String, dynamic> prefs) async {
-    final alreadyDone =
-        await _storage.read(key: _kMigrationDoneKey) == 'true';
+    final alreadyDone = await _storage.read(key: _kMigrationDoneKey) == 'true';
     if (alreadyDone) return;
 
     final deviceId = prefs['last_connected_device_id'] as String?;

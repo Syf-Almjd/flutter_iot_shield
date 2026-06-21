@@ -66,7 +66,7 @@ flowchart TD
 
 ## 🔐 Initialization
 
-Initialize the [IoTShield](file:///Users/saifalmajd/saif/flutter_iot_shield/lib/src/core/iot_shield.dart) singleton once in your application initialization sequence (e.g., inside `main.dart`):
+Initialize the [IoTShield](lib/src/core/iot_shield.dart) singleton once in your application initialization sequence (e.g., inside `main.dart`):
 
 ```dart
 import 'package:flutter/material.dart';
@@ -175,7 +175,7 @@ try {
 
 ## ⚡ Real-Time Anomaly & Scan Rate Monitoring
 
-The [AnomalyDetector](file:///Users/saifalmajd/saif/flutter_iot_shield/lib/src/monitoring/anomaly_detector.dart) monitors connection trends to emit alerts for reconnection storms, device switching, or high scanning activity:
+The [AnomalyDetector](lib/src/monitoring/anomaly_detector.dart) monitors connection trends to emit alerts for reconnection storms, device switching, or high scanning activity:
 
 ```dart
 import 'package:flutter_iot_shield/flutter_iot_shield.dart';

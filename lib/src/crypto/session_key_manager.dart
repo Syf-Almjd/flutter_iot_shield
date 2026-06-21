@@ -30,12 +30,10 @@ class SecureSessionKey {
     this.expiresAt,
   });
 
-  bool get isExpired =>
-      expiresAt != null && DateTime.now().isAfter(expiresAt!);
+  bool get isExpired => expiresAt != null && DateTime.now().isAfter(expiresAt!);
 
   @override
-  String toString() =>
-      'SecureSessionKey(device=$deviceId, session=$sessionId, '
+  String toString() => 'SecureSessionKey(device=$deviceId, session=$sessionId, '
       'created=$createdAt, expired=$isExpired)';
 }
 

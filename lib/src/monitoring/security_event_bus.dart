@@ -47,15 +47,18 @@ class SecurityEventBus {
 
   /// Convenience emitters:
 
-  void emitInfo(SecurityEventType type, {required String message, Map<String, dynamic> meta = const {}}) {
+  void emitInfo(SecurityEventType type,
+      {required String message, Map<String, dynamic> meta = const {}}) {
     emit(SecurityEvent.info(type, message: message, metadata: meta));
   }
 
-  void emitWarning(SecurityEventType type, {required String message, Map<String, dynamic> meta = const {}}) {
+  void emitWarning(SecurityEventType type,
+      {required String message, Map<String, dynamic> meta = const {}}) {
     emit(SecurityEvent.warning(type, message: message, metadata: meta));
   }
 
-  void emitCritical(SecurityEventType type, {required String message, Map<String, dynamic> meta = const {}}) {
+  void emitCritical(SecurityEventType type,
+      {required String message, Map<String, dynamic> meta = const {}}) {
     emit(SecurityEvent.critical(type, message: message, metadata: meta));
   }
 

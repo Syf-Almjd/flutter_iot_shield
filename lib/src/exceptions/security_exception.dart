@@ -9,7 +9,8 @@ abstract class IoTSecurityException implements Exception {
   const IoTSecurityException(this.message, {this.code, this.originalError});
 
   @override
-  String toString() => '$runtimeType: $message${code != null ? ' (Code: $code)' : ''}';
+  String toString() =>
+      '$runtimeType: $message${code != null ? ' (Code: $code)' : ''}';
 }
 
 /// Thrown when device attestation fails.
@@ -26,7 +27,8 @@ class EncryptionException extends IoTSecurityException {
 /// Thrown when pairing fails.
 class PairingFailedException extends IoTSecurityException {
   final PairingFailureReason reason;
-  const PairingFailedException(super.message, {required this.reason, super.code, super.originalError});
+  const PairingFailedException(super.message,
+      {required this.reason, super.code, super.originalError});
 }
 
 /// Reasons why a pairing process might fail.

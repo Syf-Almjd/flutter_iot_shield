@@ -18,7 +18,8 @@ abstract class CryptoProvider {
   Future<CryptoKeyPair> generateECDHKeyPair();
 
   /// Computes X25519 shared secret bytes.
-  Future<Uint8List> computeSharedSecret(SimpleKeyPair myKeyPair, Uint8List theirPublicKey);
+  Future<Uint8List> computeSharedSecret(
+      SimpleKeyPair myKeyPair, Uint8List theirPublicKey);
 
   /// Performs AES-256-GCM authenticated encryption.
   Future<Uint8List> encryptAES256GCM({
@@ -38,7 +39,8 @@ abstract class CryptoProvider {
   });
 
   /// Computes an HMAC-SHA256 hash.
-  Future<Uint8List> hmacSHA256({required Uint8List key, required Uint8List data});
+  Future<Uint8List> hmacSHA256(
+      {required Uint8List key, required Uint8List data});
 
   /// Verifies an Ed25519 or ECDSA-P256 signature.
   Future<bool> verifySignature({
@@ -67,9 +69,11 @@ class DefaultCryptoProvider implements CryptoProvider {
   }
 
   @override
-  Future<Uint8List> computeSharedSecret(SimpleKeyPair myKeyPair, Uint8List theirPublicKey) async {
+  Future<Uint8List> computeSharedSecret(
+      SimpleKeyPair myKeyPair, Uint8List theirPublicKey) async {
     final algorithm = X25519();
-    final remotePublicKey = SimplePublicKey(theirPublicKey, type: KeyPairType.x25519);
+    final remotePublicKey =
+        SimplePublicKey(theirPublicKey, type: KeyPairType.x25519);
     final sharedSecret = await algorithm.sharedSecretKey(
       keyPair: myKeyPair,
       remotePublicKey: remotePublicKey,
@@ -120,7 +124,8 @@ class DefaultCryptoProvider implements CryptoProvider {
   }
 
   @override
-  Future<Uint8List> hmacSHA256({required Uint8List key, required Uint8List data}) async {
+  Future<Uint8List> hmacSHA256(
+      {required Uint8List key, required Uint8List data}) async {
     final algorithm = Hmac.sha256();
     final secretKey = SecretKey(key);
     final mac = await algorithm.calculateMac(data, secretKey: secretKey);
@@ -135,7 +140,8 @@ class DefaultCryptoProvider implements CryptoProvider {
   }) async {
     try {
       final algorithm = Ed25519();
-      final remotePublicKey = SimplePublicKey(publicKey, type: KeyPairType.ed25519);
+      final remotePublicKey =
+          SimplePublicKey(publicKey, type: KeyPairType.ed25519);
       final sig = Signature(signature, publicKey: remotePublicKey);
       return await algorithm.verify(data, signature: sig);
     } catch (_) {

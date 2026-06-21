@@ -3,10 +3,10 @@
 /// Implements a sliding window replay protection algorithm (IPsec style).
 class ReplayProtection {
   final int windowSize;
-  
+
   // Track the maximum sequence number seen per device.
   final Map<String, int> _maxSeenSequences = {};
-  
+
   // Set of received sequence numbers within the sliding window.
   final Map<String, Set<int>> _receivedInWindow = {};
 

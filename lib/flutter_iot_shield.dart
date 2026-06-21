@@ -11,7 +11,7 @@
 /// - Firmware package verification (anti-downgrade & ECDSA signatures)
 /// - Local secure credentials storage
 /// - Real-time security anomaly monitoring
-library flutter_iot_shield;
+library;
 
 // Core
 export 'src/core/iot_shield.dart';

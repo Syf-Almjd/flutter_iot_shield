@@ -21,7 +21,8 @@ class AttestationResult {
   final Uint8List? devicePublicKey;
 
   /// Internal constructor for creating an [AttestationResult].
-  const AttestationResult._(this.isValid, this.reason, this.deviceCertificate, this.devicePublicKey);
+  const AttestationResult._(
+      this.isValid, this.reason, this.deviceCertificate, this.devicePublicKey);
 
   /// Creates a successful [AttestationResult] containing the [deviceCertificate] and [devicePublicKey].
   factory AttestationResult.success({
@@ -39,7 +40,7 @@ class AttestationResult {
 class DeviceAttestationManager {
   final CryptoProvider _crypto;
   X509Certificate? _rootCA;
-  
+
   // Basic Certificate Revocation List (CRL) of serial numbers
   final Set<String> _crl = {};
 
@@ -64,7 +65,8 @@ class DeviceAttestationManager {
   }) async {
     try {
       if (_rootCA == null) {
-        return AttestationResult.failure('Attestation manager not initialized with Root CA.');
+        return AttestationResult.failure(
+            'Attestation manager not initialized with Root CA.');
       }
 
       // 1. Parse device certificate
@@ -72,7 +74,8 @@ class DeviceAttestationManager {
 
       // 2. Check if certificate is revoked
       if (_crl.contains(deviceCert.serialNumber.toLowerCase())) {
-        return AttestationResult.failure('Device certificate is revoked in CRL.');
+        return AttestationResult.failure(
+            'Device certificate is revoked in CRL.');
       }
 
       // 3. Verify Certificate Chain (Device Cert signed by Root CA)
@@ -82,18 +85,21 @@ class DeviceAttestationManager {
         signature: deviceCert.signatureBytes,
       );
       if (!chainValid) {
-        return AttestationResult.failure('Certificate chain verification failed.');
+        return AttestationResult.failure(
+            'Certificate chain verification failed.');
       }
 
       // 4. Verify challenge response (Device signs [challengeNonce + deviceId] using its private key)
-      final expectedPayload = Uint8List.fromList([...challengeNonce, ...utf8.encode(deviceId)]);
+      final expectedPayload =
+          Uint8List.fromList([...challengeNonce, ...utf8.encode(deviceId)]);
       final sigValid = await _crypto.verifySignature(
         publicKey: deviceCert.publicKeyBytes,
         data: expectedPayload,
         signature: challengeResponse,
       );
       if (!sigValid) {
-        return AttestationResult.failure('Challenge signature verification failed.');
+        return AttestationResult.failure(
+            'Challenge signature verification failed.');
       }
 
       return AttestationResult.success(
@@ -103,7 +109,8 @@ class DeviceAttestationManager {
     } on IoTSecurityException catch (e) {
       return AttestationResult.failure(e.message);
     } catch (e) {
-      return AttestationResult.failure('Unexpected error during attestation: $e');
+      return AttestationResult.failure(
+          'Unexpected error during attestation: $e');
     }
   }
 }

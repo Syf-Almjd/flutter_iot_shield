@@ -18,7 +18,7 @@ class TrustManager {
   TrustManager({FlutterSecureStorage? storage})
       : _storage = storage ??
             const FlutterSecureStorage(
-              aOptions: AndroidOptions(encryptedSharedPreferences: true),
+              aOptions: AndroidOptions(),
               iOptions: IOSOptions(
                 accessibility: KeychainAccessibility.first_unlock_this_device,
               ),
@@ -90,7 +90,8 @@ class TrustManager {
     try {
       final raw = await _storage.read(key: '$_kFingerprintPrefix$deviceId');
       if (raw == null || raw.isEmpty) return null;
-      return DeviceFingerprint.fromJson(jsonDecode(raw) as Map<String, dynamic>);
+      return DeviceFingerprint.fromJson(
+          jsonDecode(raw) as Map<String, dynamic>);
     } catch (e) {
       IoTShieldLogger.warn(
         'Failed to load fingerprint for $deviceId: $e',

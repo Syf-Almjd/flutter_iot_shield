@@ -28,7 +28,10 @@ class ChannelSanitizer {
     if (rawEvent is! Map) {
       IoTShieldLogger.warn(
         'Non-map event rejected from platform channel',
-        meta: {'event': SecurityEventType.eventRejected.name, 'type': rawEvent.runtimeType.toString()},
+        meta: {
+          'event': SecurityEventType.eventRejected.name,
+          'type': rawEvent.runtimeType.toString()
+        },
       );
       return null;
     }

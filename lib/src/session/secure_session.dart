@@ -6,16 +6,16 @@ import 'dart:typed_data';
 class SecureSession {
   final String sessionId;
   final String deviceId;
-  
+
   // Symmetric keys derived via HKDF
   final Uint8List encryptionKey;
   final Uint8List authKey;
   final Uint8List ivKey;
   final Uint8List rotationKey;
-  
+
   final DateTime createdAt;
   DateTime lastSeen;
-  
+
   int _outboundCounter = 0;
   int _lastInboundCounter = -1;
   int _rotationCount = 0;

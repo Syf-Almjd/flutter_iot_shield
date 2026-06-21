@@ -52,7 +52,7 @@ class X509Certificate {
     // Now parse TBS Certificate to extract public key, serial number, issuer, subject
     // Skip header of tbsBytes (which is SEQUENCE) to parse its contents
     final tbsParser = DerParser(_stripHeader(tbsBytesWithHeader));
-    
+
     // Version (tagged [0], optional)
     final tag = tbsParser.peekTag();
     if (tag == 0xA0) {
@@ -76,7 +76,8 @@ class X509Certificate {
       tbsBytes: tbsBytesWithHeader,
       signatureBytes: signatureBitString,
       publicKeyBytes: pubKeyBytes,
-      serialNumber: serial.map((b) => b.toRadixString(16).padLeft(2, '0')).join(),
+      serialNumber:
+          serial.map((b) => b.toRadixString(16).padLeft(2, '0')).join(),
       issuer: 'CN=IoT Manufacturer CA',
       subject: 'CN=Smart Watch Client',
     );
@@ -116,7 +117,7 @@ class DerParser {
     final start = _position;
     if (_position >= _bytes.length) return Uint8List(0);
     _position++; // Skip tag
-    
+
     // Read length
     if (_position >= _bytes.length) return Uint8List(0);
     int len = _bytes[_position++];
@@ -134,7 +135,9 @@ class DerParser {
 
   Uint8List readSequence() {
     final tag = _bytes[_position++];
-    if (tag != 0x30) throw FormatException('Expected SEQUENCE (0x30), got $tag');
+    if (tag != 0x30) {
+      throw FormatException('Expected SEQUENCE (0x30), got $tag');
+    }
     return _readContent();
   }
 
@@ -146,7 +149,9 @@ class DerParser {
 
   Uint8List readBitString() {
     final tag = _bytes[_position++];
-    if (tag != 0x03) throw FormatException('Expected BIT STRING (0x03), got $tag');
+    if (tag != 0x03) {
+      throw FormatException('Expected BIT STRING (0x03), got $tag');
+    }
     final content = _readContent();
     // Skip the number of unused bits (first byte)
     if (content.isEmpty) return content;

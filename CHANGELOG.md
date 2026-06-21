@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.2
+
+- Integrate `dart_secure` security framework.
+- Implement double-encryption for stored device identity data using `inAppEncrypt` and `inAppDecrypt`.
+- Replace legacy SHA-256 fingerprint hashing with `hashEncrypt`.
 
 ## 1.2.1
 

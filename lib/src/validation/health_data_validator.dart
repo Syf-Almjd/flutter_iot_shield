@@ -78,7 +78,8 @@ class HealthDataValidator {
         SecurityEventType.healthDataRejected,
       );
       return ValidationResult.rejected(
-        reason: 'SpO2 ${pct.toStringAsFixed(1)}% outside valid range [$min-$max]',
+        reason:
+            'SpO2 ${pct.toStringAsFixed(1)}% outside valid range [$min-$max]',
       );
     }
     if (pct < 80) {
@@ -141,7 +142,8 @@ class HealthDataValidator {
         SecurityEventType.healthDataRejected,
       );
       return ValidationResult.rejected(
-        reason: 'Temperature ${celsius.toStringAsFixed(1)}°C outside valid range [$min-$max]',
+        reason:
+            'Temperature ${celsius.toStringAsFixed(1)}°C outside valid range [$min-$max]',
       );
     }
     return ValidationResult.valid();
