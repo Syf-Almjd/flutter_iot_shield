@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.1.0
+
+- Add support for [GitHub Sponsors](https://github.com/sponsors/Syf-Almjd)
+- Upgrade dependencies
+- Fix compile errors
+- Fix linting errors
+- Improve documentation
+- Add usage examples
+
+
+
+
 ## 1.0.0
 
 - Initial release of `flutter_iot_shield` security layer for Flutter IoT applications.

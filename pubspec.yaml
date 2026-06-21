@@ -1,6 +1,6 @@
 name: flutter_iot_shield
 description: A reusable IoT security layer for Flutter apps. Provides device authentication, health data validation, firmware verification, and secure storage.
-version: 1.0.0
+version: 1.1.0
 homepage: https://github.com/Syf-Almjd/flutter_iot_shield
 repository: https://github.com/Syf-Almjd/flutter_iot_shield
 issue_tracker: https://github.com/Syf-Almjd/flutter_iot_shield/issues
