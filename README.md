@@ -28,7 +28,7 @@ To use this package, add `flutter_iot_shield` as a dependency in your `pubspec.y
 
 ```yaml
 dependencies:
-  flutter_iot_shield: ^1.0.0
+  flutter_iot_shield: ^1.2.1
 ```
 
 Then import the necessary features in your Dart code:
